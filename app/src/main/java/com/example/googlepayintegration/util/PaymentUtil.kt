@@ -10,6 +10,7 @@ import org.json.JSONException
 import org.json.JSONObject
 
 object PaymentUtil {
+    private const val TEST_GIT =  "https://github.com/google-pay/android-quickstart/blob/f1caab23fdaadd8d133d31aeb612ecbdbdeda5ed/kotlin/app/src/androidTest/java/com/google/android/gms/samples/pay/GooglePayCheckoutTest/SampleGooglePayCheckoutTest.kt"
 
     // GPay API version
     private val baseRequest = JSONObject()

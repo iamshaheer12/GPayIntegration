@@ -2,6 +2,7 @@ package com.example.googlepayintegration
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
             CommonStatusCodes.SUCCESS -> {
                 taskResult.result!!.let {
                     Log.i("Google Pay result:", it.toJson())
+                    Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show()
                 }
             }
             //CommonStatusCodes.CANCELED -> The user canceled
@@ -43,9 +45,9 @@ class MainActivity : ComponentActivity() {
             val payState: GPayUiState by viewModel.gPayUiState.collectAsStateWithLifecycle()
 
             ShopScreen(
-                title = "Men's Tech Shell Full-Zip",
-                description = "A versatile full-zip that you can wear all day long and even...",
-                price = "$50.20",
+                title = "Men's Peach Interlock POLO",
+                description = "Constructed through a unique weaving technique that involves the utilization of special and unique yarns or fibers which are simply being looped and cut to create the raised textured effect. The result of this is a fabric that is both visually interesting and practically more attractive..",
+                price = "$ 30.2",
                 image = R.drawable.image,
                 payUiState = payState,
                 onGooglePayButtonClick = this::requestPayment,
@@ -56,7 +58,7 @@ class MainActivity : ComponentActivity() {
 
     private fun requestPayment() {
         lifecycleScope.launch {
-            val task =  viewModel.startPaymentProcess("30").awaitTask()
+            val task =  viewModel.startPaymentProcess("30.2").awaitTask()
             paymentDataLauncher.launch(task)
         }
 

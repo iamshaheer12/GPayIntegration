@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.example.googlepayintegration.GPayUiState
 import com.example.googlepayintegration.util.PaymentUtil
 import com.example.googlepayintegration.R
-
+import com.google.pay.button.ButtonType
 import com.google.pay.button.PayButton
 
 @Composable
@@ -74,7 +74,8 @@ fun ShopScreen(
                 .padding(padding)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(space = padding / 2),
-        ) {
+            horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
             Image(
                 contentDescription = null,
                 painter = painterResource(image),
@@ -86,24 +87,27 @@ fun ShopScreen(
                 text = title,
                 color = black,
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start
             )
-            Text(text = price, color = black)
-            Spacer(Modifier)
-            Text(
-                text = "Description",
+            Text(text = price,
                 color = black,
-                fontWeight = FontWeight.Bold
+                textAlign = TextAlign.Start
             )
             Text(
                 text = description,
-                color = black
+                modifier = Modifier.padding(start = 28.dp, end = 28.dp),
+                color = black,
+                textAlign = TextAlign.Start
             )
             if (payUiState !is GPayUiState.NotStarted) {
                 PayButton(
                     modifier = Modifier
                         .testTag("payButton")
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 8.dp)
+                    ,
+                    type = ButtonType.Order,
                     onClick = onGooglePayButtonClick,
                     allowedPaymentMethods = PaymentUtil.allowedPaymentMethods.toString(),
                 )
